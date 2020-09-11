@@ -1,10 +1,14 @@
-name: build-status
+name: Build
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Logging build
+        run: |
+          DATE=$(date)
+          echo "$DATE - <a href='https://github.com/rdok/publish-gh-page-action/commit/${GITHUB_SHA}'>${GITHUB_SHA}</a>" >> build/index.html
       - name: Build
         uses: ./
         with:

@@ -30,7 +30,6 @@ rm -f -R docs
 mv -f "$DIRECTORY" docs
 logSuccess "  Done"
 
-printenv
 logInfo "> Git commit & push"
 git add --all
 git commit --message "Publish build $GITHUB_SHA"
