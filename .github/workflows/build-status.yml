@@ -5,14 +5,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Build
+      - name: Build page
         run: |
           mkdir build
           DATE=$(date)
           echo "Published at $DATE" >> build/index.html
           echo "<a href='https://github.com/rdok/publish-gh-page-action/commit/${GITHUB_SHA}'>${GITHUB_SHA}</a>" >> build/index.html
-      - name: Publish
+      - name: Publish page
         uses: ./
         with:
           directory: build
           github-token: ${{ github.token }}
+      - name: Test published page
+        run: |
+          echo "Waiting for publish to end."
+          sleep 30
+          OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
+          REPO=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/.*\///g')
+          response=$(curl https://"${OWNER}".github.io/${REPO}/)
+          if [[ "$response" != *"$GITHUB_SHA"* ]]; then
+            echo "Unable to find ${GITHUB_SHA} in the published page."
+            echo "Actual content: $response"
+            exit 1
+          fi
