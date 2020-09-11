@@ -5,11 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Logging build
+      - name: Build
         run: |
           DATE=$(date)
           echo "$DATE - <a href='https://github.com/rdok/publish-gh-page-action/commit/${GITHUB_SHA}'>${GITHUB_SHA}</a>" >> build/index.html
-      - name: Build
+      - name: Publish
         uses: ./
         with:
           directory: build
