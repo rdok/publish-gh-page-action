@@ -34,7 +34,6 @@ logSuccess "  Done"
 
 logInfo "> Fetch branches "
 git status
-#git fetch --unshallow origin "$BRANCH" gh-pages 2>&1
 logWarning "  Un-shallow fetch temporarily disabled"
 logSuccess "  Done"
 
@@ -43,6 +42,7 @@ GH_PAGES_REMOTE=$(git ls-remote --heads origin gh-pages)
 if [ ! -z "$GH_PAGES_REMOTE" ];then
   logInfo "  gh-pages exists"
   logInfo "  merge it with ours"
+  git fetch origin gh-pages
   git merge --strategy=ours origin/gh-pages
 fi
 logSuccess "  Done"
