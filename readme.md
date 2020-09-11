@@ -12,7 +12,7 @@ You'll have to modify your repo settings as per [Choosing a publishing source](h
 
 ```yml
     - name: Publish GitHub Page
-      uses: rdok/publish-gh-page-action@v1
+      uses: rdok/publish-gh-page-action@v1.0.4
       with:
         directory: build
         github-token: ${{ github.token }}
