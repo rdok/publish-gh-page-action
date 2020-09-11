@@ -11,4 +11,5 @@ This GitHub action publishes a GitHub page.
       uses: rdok/publish-gh-page-action@v1
       with:
         directory: build
+        github-token: ${{ github.token }}
 ```

@@ -7,8 +7,10 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build
         run: |
+          mkdir build
           DATE=$(date)
-          echo "$DATE - <a href='https://github.com/rdok/publish-gh-page-action/commit/${GITHUB_SHA}'>${GITHUB_SHA}</a>" >> build/index.html
+          echo "Published at $DATE" >> build/index.html
+          echo "<a href='https://github.com/rdok/publish-gh-page-action/commit/${GITHUB_SHA}'>${GITHUB_SHA}</a>" >> build/index.html
       - name: Publish
         uses: ./
         with:
