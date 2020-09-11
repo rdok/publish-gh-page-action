@@ -16,3 +16,15 @@ jobs:
         with:
           directory: build
           github-token: ${{ github.token }}
+      - name: Test
+        run: |
+          echo "Waiting for publish to end."
+          sleep 13
+          OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
+          REPO=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/.*\///g')
+          response=$(curl https://"${OWNER}".github.io/${REPO}/)
+          if [[ "$response" != *"$GITHUB_SHA"* ]]; then
+            echo "Unable to find ${GITHUB_SHA} in the published page."
+            echo "Actual content: $response"
+            exit 1
+          fi
