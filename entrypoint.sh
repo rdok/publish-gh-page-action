@@ -42,8 +42,16 @@ GH_PAGES_REMOTE=$(git ls-remote --heads origin gh-pages)
 if [ ! -z "$GH_PAGES_REMOTE" ];then
   logInfo "  gh-pages exists"
   logInfo "  merge it with ours"
-  git fetch origin gh-pages
+  if $(git rev-parse --is-shallow-repository); then
+    echo "Shallow repo found."
+    git fetch --unshallow origin gh-pages
+  else
+    echo "Full repo found."
+    git fetch origin gh-pages
+  fi
+
   git merge --strategy=ours origin/gh-pages
+ls -lat
 fi
 logSuccess "  Done"
 
@@ -55,6 +63,7 @@ logSuccess "  Done"
 logInfo "> Git commit & push"
 git add --all
 git commit --message "Publish build $GITHUB_SHA"
+ls -lat
 git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/heads/gh-pages
 logSuccess "  Done"
 
