@@ -1,0 +1,22 @@
+name: Publish GitHub Page
+description: Publish a GitHub Page Action
+author: Rizart Dokollari <r.dokollari@gmail.com>
+
+branding:
+  icon: server
+  color: green
+
+inputs:
+  directory:
+    description: The directory to publish.
+    required: true
+  github-token:
+    description: The token GitHub autogenerates
+    required: true
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.directory }}
+    - ${{ inputs.github-token }}
