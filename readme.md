@@ -12,8 +12,11 @@ You'll have to modify your repo settings as per [Choosing a publishing source](h
 
 ```yml
     - name: Publish GitHub Page
-      uses: rdok/publish-gh-page-action@v1.0.4
+      uses: rdok/publish-gh-page-action@v1.0.3
       with:
         directory: build
         github-token: ${{ github.token }}
 ```
+
+### Project example
+- [rdok/space-explorer](https://github.com/rdok/space-explorer/blob/master/.github/workflows/deploy-react.yml#L20)
