@@ -4,6 +4,10 @@
 
 This GitHub action publishes a GitHub page.
 
+It will publish a given directory to the `gh-pages` branch, on the `docs` folder.  
+
+You'll have to modify your repo settings as per [Choosing a publishing source](https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+
 ## Usage
 
 ```yml
