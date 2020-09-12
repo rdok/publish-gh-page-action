@@ -41,7 +41,7 @@ git checkout --force --track origin/gh-pages
 logSuccess "  Done"
 
 logInfo "> Adding docs"
-mv -f /tmp/"$DIRECTORY"/* docs/
+cp -fR /tmp/"$DIRECTORY"/* docs/
 logSuccess "  Done"
 
 logInfo "> Git commit & push"
