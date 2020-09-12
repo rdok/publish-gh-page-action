@@ -20,4 +20,4 @@ You'll have to modify your repo settings as per [Choosing a publishing source](h
 ```
 
 ### Project example
-- [rdok/space-explorer](https://github.com/rdok/space-explorer/blob/master/.github/workflows/deploy-react.yml#L20)
+- [React with PUBLIC_URL](https://github.com/rdok/space-explorer/blob/master/.github/workflows/deploy-react.yml#L20)
