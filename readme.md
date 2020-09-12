@@ -15,7 +15,9 @@ You'll have to modify your repo settings as per [Choosing a publishing source](h
       uses: rdok/publish-gh-page-action@v1.0.3
       with:
         directory: build
+        github-actor: ${{ github.actor }}
         github-token: ${{ github.token }}
+        github-repository: ${{ github.repository }}
 ```
 
 ### Project example
