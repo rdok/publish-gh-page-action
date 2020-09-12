@@ -32,7 +32,7 @@ git config --local user.name "GitHub Action"
 logSuccess "  Done"
 
 logInfo "> Prepare docs directory"
-mv -f "$DIRECTORY" /tmp
+mv -f "$DIRECTORY" /tmp/build
 logSuccess "  Done"
 
 logInfo "> Fetch gh-pages"
@@ -41,11 +41,11 @@ git checkout --force --track origin/gh-pages
 logSuccess "  Done"
 
 logInfo "> Adding docs"
-cp -fR /tmp/"$DIRECTORY"/* docs/
+cp -fR /tmp/build/* docs/
 logSuccess "  Done"
 
 logInfo "> Git commit & push"
 git add docs
-git commit --message "Publish build $GITHUB_SHA"
+git commit --allow-empty --message "Publish build $GITHUB_SHA"
 git push origin gh-pages
 logSuccess "  Done"
