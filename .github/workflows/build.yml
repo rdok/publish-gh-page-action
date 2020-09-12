@@ -6,22 +6,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Build page
         run: |
           mkdir build
           DATE=$(date)
           echo "Published at $DATE" >> build/index.html
           echo "<a href='https://github.com/rdok/publish-gh-page-action/commit/${GITHUB_SHA}'>${GITHUB_SHA}</a>" >> build/index.html
-      - name: Publish page
+      - name: Trigger publish action
         uses: ./
         with:
           directory: build
-          github-token: ${{ github.token }}
-      - name: Test published page
+      - name: Waiting for GitHub to publish the page
+        run: sleep 25
+      - name: Test contents of published page
         run: |
-          echo "Waiting for publish to end."
-          sleep 30
           OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
           REPO=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/.*\///g')
           response=$(curl https://"${OWNER}".github.io/${REPO}/)

@@ -3,8 +3,8 @@ description: Publish a GitHub Page Action
 author: Rizart Dokollari <r.dokollari@gmail.com>
 
 branding:
-  icon: server
-  color: green
+  icon: layers
+  color: gray-dark
 
 inputs:
   directory:
@@ -13,10 +13,15 @@ inputs:
   github-token:
     description: The token GitHub autogenerates
     required: true
+  github-repository:
+    description: The owner & repository. E.g. octocat/Hello-World
+    required: true
+  github-actor:
+    description: The name of the person or app that initiated the workflow. For example, octocat.
+    required: true
 
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.directory }}
-    - ${{ inputs.github-token }}
