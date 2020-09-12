@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Build page
         run: |
           mkdir build
@@ -17,11 +17,8 @@ jobs:
         uses: ./
         with:
           directory: build
-          github-actor: ${{ github.actor }}
-          github-token: ${{ github.token }}
-          github-repository: ${{ github.repository }}
       - name: Waiting for GitHub to publish the page
-        run: sleep 30
+        run: sleep 25
       - name: Test contents of published page
         run: |
           OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
