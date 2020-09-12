@@ -25,19 +25,16 @@ logWarning() {
 
 
 DIRECTORY=$1
-GITHUB_TOKEN=$2
+GITHUB_ACTOR=$2
+GITHUB_TOKEN=$3
+GITHUB_REPOSITORY=$4
 
 logInfo "> Set up GitHub action user"
 git config --local user.email "action@github.com"
 git config --local user.name "GitHub Action"
 logSuccess "  Done"
 
-logInfo "> Fetch branches "
-git status
-logWarning "  Un-shallow fetch temporarily disabled"
-logSuccess "  Done"
-
-logInfo "> Merge gh-pages branch"
+logInfo "> Fetch branches"
 GH_PAGES_REMOTE=$(git ls-remote --heads origin gh-pages)
 if [ ! -z "$GH_PAGES_REMOTE" ];then
   logInfo "  gh-pages exists"
@@ -51,7 +48,6 @@ if [ ! -z "$GH_PAGES_REMOTE" ];then
   fi
 
   git merge --strategy=ours origin/gh-pages
-ls -lat
 fi
 logSuccess "  Done"
 
@@ -66,4 +62,3 @@ git commit --message "Publish build $GITHUB_SHA"
 ls -lat
 git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/heads/gh-pages
 logSuccess "  Done"
-

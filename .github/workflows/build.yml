@@ -13,15 +13,17 @@ jobs:
           DATE=$(date)
           echo "Published at $DATE" >> build/index.html
           echo "<a href='https://github.com/rdok/publish-gh-page-action/commit/${GITHUB_SHA}'>${GITHUB_SHA}</a>" >> build/index.html
-      - name: Publish page
+      - name: Trigger page publishment
         uses: ./
         with:
           directory: build
+          github-actor: ${{ github.actor }}
           github-token: ${{ github.token }}
-      - name: Test published page
+          github-repository: ${{ github.repository }}
+      - name: Waiting for GitHub to publish the page
+        run: sleep 30
+      - name: Test contents of published page
         run: |
-          echo "Waiting for publish to end."
-          sleep 30
           OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
           REPO=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/.*\///g')
           response=$(curl https://"${OWNER}".github.io/${REPO}/)
