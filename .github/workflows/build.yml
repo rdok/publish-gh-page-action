@@ -17,7 +17,9 @@ jobs:
         uses: ./
         with:
           directory: build
+          github-actor: ${{ github.actor }}
           github-token: ${{ github.token }}
+          github-repository: ${{ github.repository }}
       - name: Test published page
         run: |
           echo "Waiting for publish to end."
