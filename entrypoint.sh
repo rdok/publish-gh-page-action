@@ -46,6 +46,6 @@ logSuccess "  Done"
 
 logInfo "> Git commit & push"
 git add docs
-git commit --message "Publish build $GITHUB_SHA"
+git commit --allow-empty --message "Publish build $GITHUB_SHA"
 git push origin gh-pages
 logSuccess "  Done"
