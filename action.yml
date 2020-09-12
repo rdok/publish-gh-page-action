@@ -10,15 +10,6 @@ inputs:
   directory:
     description: The directory to publish.
     required: true
-  github-token:
-    description: The token GitHub autogenerates
-    required: true
-  github-repository:
-    description: The owner & repository. E.g. octocat/Hello-World
-    required: true
-  github-actor:
-    description: The name of the person or app that initiated the workflow. For example, octocat.
-    required: true
 
 runs:
   using: docker
